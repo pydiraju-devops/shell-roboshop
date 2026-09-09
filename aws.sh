@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+trap "echo "this command is error $LINENO , command: $BASH_COMMAND ""
 
 SG_ID="sg-078da222b6b5e6e14"
 AMI_ID="ami-0220d79f3f480ecf5"
