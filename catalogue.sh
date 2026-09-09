@@ -5,6 +5,7 @@ USER_ID=$(id -u)
 
 LOGS_FOLDER="/var/log/shell-roboshop"
 LOGS_FILE="$LOGS_FOLDER/$0.log"
+SCRIPT_DIR=$PWD
 
 R="\e[31m"
 G="\e[32m"
@@ -64,7 +65,7 @@ VALIDATE $? "unzipping code"
 npm install  &>> $LOGS_FILE
 VALIDATE $? "npm installation"
 
-cp catalogue service.sh   /etc/systemd/system/catalogue.service &>> $LOGS_FILE
+cp $SCRIPT_DIR/catalogue service.sh   /etc/systemd/system/catalogue.service &>> $LOGS_FILE
 VALIDATE $? "service created"
 
 systemctl daemon-reload &>> $LOGS_FILE
