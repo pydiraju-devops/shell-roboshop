@@ -4,6 +4,8 @@ USER_ID=$(id -u)
 
 LOGS_FOLDER="/var/log/shell-roboshop"
 LOGS_FILE="$LOGS_FOLDER/$0.log"
+SCRIPT_DIR=$PWD
+MONGODB_HOST=mongodb.pydiraju.online
 
 R="\e[31m"
 G="\e[32m"
@@ -27,6 +29,10 @@ VALIDATE() {
     fi
 }
 
+cp $SCRIPT_DIR/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOGS_FILE
+VALIDATE $? "added rabbitmq repo"
+
+
 dnf install rabbitmq-server -y
 VALIDATE $? "installing rabbiit mq"
 
@@ -36,4 +42,4 @@ VALIDATE $? "enabling and start"
 
 rabbitmqctl add_user roboshop roboshop123
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
-VALIDATE $? ""
+VALIDATE $? "created user and giving permissions"
