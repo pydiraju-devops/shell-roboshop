@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SG_ID="sg-078da222b6b5e6e14"
+SG_ID="sg-0e979c41f3933b1d9"
 AMI_ID="ami-0220d79f3f480ecf5"
 ZONE_ID="Z05434983MKHE7P63RH25"
 DOMAIN_NAME="pydiraju.online"
