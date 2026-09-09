@@ -26,3 +26,21 @@ VALIDATE() {
         echo -e "$2 is $G success $N" | tee -a "$LOGS_FILE"
     fi
 }
+
+cp mongo.repo /etc/yum.repos.d/mongo.repo
+VALIDATE $? "copying mongo.repo"
+
+dnf install mongodb-org -y 
+VALIDATE $? "installing mongodb"
+
+systemctl enable mongod 
+VALIDATE $? "enabling mongodb"
+
+systemctl start mongod 
+VALIDATE $? "start mongodb"
+
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
+VALIDATE $? "file edited"
+
+systemctl restart mongod
+VALIDATE $? "restarted mongod"
