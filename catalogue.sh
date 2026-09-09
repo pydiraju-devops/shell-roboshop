@@ -55,18 +55,21 @@ VALIDATE $? "unzipping code"
 cd /app 
 VALIDATE $? "path change to /app"
 
+rm -rf /app/*
+VALIDATE $? "removing existing code"
+
 unzip /tmp/catalogue.zip &>> $LOGS_FILE
 VALIDATE $? "unzipping code"
 
-npm install 
+npm install  &>> $LOGS_FILE
 VALIDATE $? "npm installation"
 
-cp catalogue service.sh   /etc/systemd/system/catalogue.service
+cp catalogue service.sh   /etc/systemd/system/catalogue.service &>> $LOGS_FILE
 VALIDATE $? "service created"
 
-systemctl daemon-reload
+systemctl daemon-reload &>> $LOGS_FILE
 VALIDATE $? "reload"
 
-systemctl enable catalogue 
-systemctl start catalogue
+systemctl enable catalogue &>> $LOGS_FILE
+systemctl start catalogue &>> $LOGS_FILE
 VALIDATE $? "enabling and start"
