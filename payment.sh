@@ -63,7 +63,7 @@ cp $SCRIPT_DIR/payment.service  /etc/systemd/system/payment.service &>>$LOGS_FIL
 VALIDATE $? "Created systemctl service"
 
 systemctl daemon-reload &>> $LOGS_FILE
-VALIDATE $? "reload
+VALIDATE $? "reload"
 
 systemctl enable payment &>> $LOGS_FILE
 VALIDATE $? "enable"
